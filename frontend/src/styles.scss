@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.small-breadcrumb {
+  font-size: 13px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsla(0,0%,70%,0.7);
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsla(0,0%, 70%,0.7);
+  border-radius: 0.5rem;
+}

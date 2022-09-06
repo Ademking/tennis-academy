@@ -1,0 +1,308 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+
+
+<div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+  <div class="border rounded-lg border-b border-gray-200 sm:rounded-lg">
+
+    <div class="rounded-t mb-0 px-4 py-5 border-0">
+      <div class="flex flex-wrap items-center">
+        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+          <h3 class="font-semibold text-2xl text-blueGray-700">Courses</h3>
+        </div>
+        <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+          <button (click)="toggleNewModal()" type="button"
+            class="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+
+
+            <svg class="-ml-0.5 mr-2 h-4 w-4" width="32" height="32" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M11 19v-6H5v-2h6V5h2v6h6v2h-6v6Z" />
+            </svg>
+
+            Add New Course
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- New Modal -->
+    <p-dialog header="Add New Course" [(visible)]="isNewModalOpen" [modal]="true" [style]="{width: '70vw'}">
+
+      <form class="space-y-8 divide-y divide-gray-200">
+        <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+          <div>
+            <div>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">Course Information</h3>
+              <p class="mt-1 max-w-2xl text-sm text-gray-500">This information will be displayed publicly so be careful
+                what you share.</p>
+            </div>
+
+            <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+
+              <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> First name
+                </label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                  <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                    class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                </div>
+              </div>
+
+              <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="last-name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Last name
+                </label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                  <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                    class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                </div>
+              </div>
+
+
+              <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="email" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Email address
+                </label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                  <input id="email" name="email" type="email" autocomplete="email"
+                    class="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md">
+                </div>
+              </div>
+
+
+              <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="address" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Address </label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                  <textarea id="address" name="address" rows="3"
+                    class="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"></textarea>
+
+                </div>
+              </div>
+
+              <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="photo" class="block text-sm font-medium text-gray-700"> Photo </label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                  <div class="flex items-center">
+                    <span class="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                      <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    </span>
+                    <button type="button"
+                      class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Change</button>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+      </form>
+
+      <ng-template pTemplate="footer">
+        <div class="pt-5">
+          <div class="flex justify-end">
+            <button type="button"
+              class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+            <button type="submit"
+              class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+          </div>
+        </div>
+      </ng-template>
+
+    </p-dialog>
+    <!-- End New Modal -->
+
+
+
+    <!-- Modify Modal -->
+    <p-dialog header="Edit Course" [(visible)]="isEditModalOpen" [modal]="true" [style]="{width: '70vw'}">
+
+      <form class="space-y-8 divide-y divide-gray-200">
+        <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+          <div>
+            <div>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">Course Information</h3>
+              <p class="mt-1 max-w-2xl text-sm text-gray-500">This information will be displayed publicly so be careful
+                what you share.</p>
+            </div>
+
+            <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+
+              <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="first-name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> First name
+                </label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                  <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                    class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                </div>
+              </div>
+
+              <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="last-name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Last name
+                </label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                  <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                    class="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md">
+                </div>
+              </div>
+
+
+              <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="email" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Email address
+                </label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                  <input id="email" name="email" type="email" autocomplete="email"
+                    class="block max-w-lg w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md">
+                </div>
+              </div>
+
+
+              <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="address" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Address </label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                  <textarea id="address" name="address" rows="3"
+                    class="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"></textarea>
+
+                </div>
+              </div>
+
+              <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-center sm:border-t sm:border-gray-200 sm:pt-5">
+                <label for="photo" class="block text-sm font-medium text-gray-700"> Photo </label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                  <div class="flex items-center">
+                    <span class="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                      <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                          d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    </span>
+                    <button type="button"
+                      class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Change</button>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+      </form>
+
+      <ng-template pTemplate="footer">
+        <div class="pt-5">
+          <div class="flex justify-end">
+            <button type="button"
+              class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cancel</button>
+            <button type="submit"
+              class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+          </div>
+        </div>
+      </ng-template>
+
+    </p-dialog>
+    <!-- End Modify Modal -->
+
+
+
+
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Duration
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coaches
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let course of courses">
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 h-10 w-10">
+                <img class="h-10 w-10 rounded-full" src="assets/tennis.png" alt="">
+              </div>
+              <div class="ml-4">
+                <div class="text-sm font-medium text-gray-900">{{ course.name }}</div>
+                <div class="text-sm text-gray-500">{{ course.description }}</div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-900">{{ course.price }}</div>
+
+          </td>
+
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ course.duration }}</td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span
+              class="inline-flex items-center px-2 mx-2 text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+
+              <svg class="-ml-0.5 mr-1 h-6 w-6" width="32" height="32" viewBox="0 0 256 256">
+                <path fill="currentColor"
+                  d="M128 32a96 96 0 0 0-64.2 167.4A72 72 0 0 1 128 160a40 40 0 1 1 40-40a40 40 0 0 1-40 40a72 72 0 0 1 64.2 39.4A96 96 0 0 0 128 32Z"
+                  opacity=".2" />
+                <path fill="currentColor"
+                  d="M232 128a104 104 0 1 0-174.2 76.7l1.3 1.2a104 104 0 0 0 137.8 0l1.3-1.2A103.7 103.7 0 0 0 232 128Zm-192 0a88 88 0 1 1 153.8 58.4a79.2 79.2 0 0 0-36.1-28.7a48 48 0 1 0-59.4 0a79.2 79.2 0 0 0-36.1 28.7A87.6 87.6 0 0 1 40 128Zm56-8a32 32 0 1 1 32 32a32.1 32.1 0 0 1-32-32Zm-21.9 77.5a64 64 0 0 1 107.8 0a87.8 87.8 0 0 1-107.8 0Z" />
+              </svg> Foulen Fouleni </span>
+
+              <span
+              class="inline-flex items-center px-2 mx-2 text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+
+              <svg class="-ml-0.5 mr-1 h-6 w-6" width="32" height="32" viewBox="0 0 256 256">
+                <path fill="currentColor"
+                  d="M128 32a96 96 0 0 0-64.2 167.4A72 72 0 0 1 128 160a40 40 0 1 1 40-40a40 40 0 0 1-40 40a72 72 0 0 1 64.2 39.4A96 96 0 0 0 128 32Z"
+                  opacity=".2" />
+                <path fill="currentColor"
+                  d="M232 128a104 104 0 1 0-174.2 76.7l1.3 1.2a104 104 0 0 0 137.8 0l1.3-1.2A103.7 103.7 0 0 0 232 128Zm-192 0a88 88 0 1 1 153.8 58.4a79.2 79.2 0 0 0-36.1-28.7a48 48 0 1 0-59.4 0a79.2 79.2 0 0 0-36.1 28.7A87.6 87.6 0 0 1 40 128Zm56-8a32 32 0 1 1 32 32a32.1 32.1 0 0 1-32-32Zm-21.9 77.5a64 64 0 0 1 107.8 0a87.8 87.8 0 0 1-107.8 0Z" />
+              </svg> Foulen Fouleni </span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-center">
+
+            <div class="flex item-center justify-center">
+              <div class="cursor-pointer w-4 mr-2 transform hover:text-green-500 hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </div>
+              <div class="cursor-pointer w-4 mr-2 transform hover:text-green-500 hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </div>
+              <div class="cursor-pointer w-4 mr-2 transform hover:text-red-500 hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </div>
+            </div>
+
+
+
+
+          </td>
+        </tr>
+
+        <!-- More people... -->
+      </tbody>
+    </table>
+  </div>
+</div>
