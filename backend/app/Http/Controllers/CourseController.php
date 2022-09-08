@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\CoursePurchase;
+use App\Models\Review;
 use Illuminate\Support\Carbon;
 
 class CourseController extends Controller
@@ -40,7 +41,9 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        $course = Course::with(['coach', 'reviews.reviewer'])->find($id);
+        $reviews = Review::where('course_id', $id)->with('reviewer')->orderBy('created_at', 'desc')->get();
+        $course = Course::with('coach')->find($id);
+        $course->reviews = $reviews;
         return $course;
     }
 
@@ -86,7 +89,28 @@ class CourseController extends Controller
             'course_id' => $id,
         ]);
         return $coursePurchase;
-
     }
 
+    public function reviewCourse($id, Request $request)
+    {
+        $connectedUser = auth()->user();
+        $review = Review::create([
+            'reviewer_id' => $connectedUser->id,
+            'course_id' =>  $id,
+            'rating' => $request->rating,
+            'review' => $request->text,
+        ]);
+        return $review;
+    }
+
+    public function getMyCourses()
+    {
+        $connectedUser = auth()->user();
+        $coursePurchases = CoursePurchase::where('buyer_id', $connectedUser->id)->with('course')->get();
+
+        foreach ($coursePurchases as $coursePurchase) {
+            $coursePurchase->course = Course::with('coach')->find($coursePurchase->course_id)->first();
+        }
+        return $coursePurchases;
+    }
 }

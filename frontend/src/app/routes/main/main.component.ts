@@ -37,6 +37,9 @@ export class MainComponent implements OnInit {
     })
 
 
+    this.getMyCourses();
+
+
   }
 
   value!: Date;
@@ -45,6 +48,22 @@ export class MainComponent implements OnInit {
 
   openCoursesPage() {
     this.router.navigate(['/user/courses'])
+  }
+
+
+  myCourses: any[] = [];
+
+
+  getMyCourses() {
+    this.dataService.myCourses().subscribe({
+      next: (data: any) => {
+        this.myCourses = data.courses;
+        console.log(this.myCourses);
+      },
+      error: (err) => {
+        this.toast.error(err.error.message);
+      }
+    })
   }
 
 

@@ -28,6 +28,8 @@ Route::prefix('v1')->group(function () {
         Route::get('/my-role', [AuthController::class, 'getRole']); // Get the role of the logged in user
         Route::get('/me', [AuthController::class, 'getConnectedUser']); // Get connected user data
         Route::post('/courses/{course}/purchase', [CourseController::class, 'purchaseCourse']); // Purchase a course
+        Route::post('/courses/{course}/review', [CourseController::class, 'reviewCourse']); // Review a course
+        Route::get('/me/courses', [CourseController::class, 'getMyCourses']); // Get the courses of the logged in user
 
     });
 });

@@ -30,7 +30,8 @@ import { AdminlayoutComponent } from './components/adminlayout/adminlayout.compo
 import { SanitizeHtmlPipe } from './pipes/sanitizehtml.pipe';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { AvatarModule } from 'primeng/avatar';
-
+import {RatingModule} from 'primeng/rating';
+import { TableModule } from 'primeng/table';
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
   timeGridPlugin,
@@ -78,6 +79,8 @@ FullCalendarModule.registerPlugins([
     TabViewModule,
     ProgressSpinnerModule,
     NgxPageScrollCoreModule,
+    RatingModule,
+    TableModule,
 
     NgxEchartsModule.forRoot({
       /**
@@ -111,6 +114,8 @@ FullCalendarModule.registerPlugins([
     NgxEchartsModule,
     ProgressSpinnerModule,
     AvatarModule,
+    RatingModule,
+    TableModule,
   ]
 
 })

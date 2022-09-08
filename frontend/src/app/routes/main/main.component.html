@@ -17,8 +17,7 @@
   </div>
 
 
-  <!-- This example requires Tailwind CSS v2.0+ -->
-  <div class="pt-20 text-center">
+  <div class="pt-20 text-center" *ngIf="myCourses.length > 0">
     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
       aria-hidden="true">
       <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -40,4 +39,28 @@
       </button>
     </div>
   </div>
+
+
+  <ng-container *ngIf="myCourses.length > 0">
+    <p-table [value]="myCourses" responsiveLayout="scroll">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Course</th>
+          <th>Start Date</th>
+          <th>Coach</th>
+          <th>Purchase Date</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-course>
+        <tr>
+          <td>{{course.course.name}}</td>
+          <td>{{course.startDate | date: 'dd/MM/yyyy'}}</td>
+          <td>{{course.course.coach.firstname + ' ' + course.course.coach.lastname}}</td>
+          <td>{{course.purchaseDate | date: 'dd/MM/yyyy'}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-container>
+
+
 </div>

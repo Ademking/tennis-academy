@@ -6,9 +6,16 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class DataService {
+  myCourses() {
+    return this.http.get(environment.API_URL + '/me/courses')
+  }
+  postReview(id: any, reviewVal: number, reviewText: string) {
+    return this.http.post(environment.API_URL + '/courses/' + id + '/review', {
+      rating: reviewVal,
+      text: reviewText
+    })
 
-
-
+  }
 
   getCourseDetails(id: any) {
     return this.http.get(environment.API_URL + '/courses/' + id)

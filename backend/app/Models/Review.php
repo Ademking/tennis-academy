@@ -12,6 +12,8 @@ class Review extends Model
     protected $fillable = [
         'review',
         'rating',
+        'reviewer_id',
+        'course_id',
     ];
 
     public function reviewer()
