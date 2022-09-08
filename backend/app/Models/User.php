@@ -22,6 +22,7 @@ class User extends Authenticatable
         'firstname',
         'lastname',
         'email',
+        'gender',
         'password',
         'matricule',
         'birthdate',
@@ -29,7 +30,7 @@ class User extends Authenticatable
         'address',
         'city',
         'country',
-        'profile_photo_path',
+        'avatar',
     ];
 
     /**
@@ -50,4 +51,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function coachingCourses()
+    {
+        return $this->hasMany('App\Models\Course', 'coach_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\Review', 'reviewer_id');
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany('App\Models\CoursePurchase', 'buyer_id');
+    }
 }

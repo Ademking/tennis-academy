@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\CoursePurchase;
+use Illuminate\Support\Carbon;
 
 class CourseController extends Controller
 {
@@ -14,7 +16,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::with('coach')->get();
         return $courses;
     }
 
@@ -38,7 +40,7 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        $course = Course::findOrfail($id);
+        $course = Course::with(['coach', 'reviews.reviewer'])->find($id);
         return $course;
     }
 
@@ -68,4 +70,23 @@ class CourseController extends Controller
         $course->delete();
         return $course;
     }
+
+    public function purchaseCourse($id, Request $request)
+    {
+
+
+        $connectedUser = auth()->user();
+        $coursePurchase = CoursePurchase::create([
+            'card_number' => $request->cardDetails['cardNumber'],
+            'card_holder_name' => $request->cardDetails['nameOnCard'],
+            'card_expiration_date' => $request->cardDetails['expiryDate'],
+            'card_cvv' => $request->cardDetails['cvv'],
+            'start_date' => Carbon::parse($request->startDate),
+            'buyer_id' => $connectedUser->id,
+            'course_id' => $id,
+        ]);
+        return $coursePurchase;
+
+    }
+
 }

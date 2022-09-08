@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-userlayout',
@@ -7,17 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserlayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    const titleCase = (str: string) => {
+      return str.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
+    }
+
+    this.dataService.myData().subscribe({
+      next: (data: any) => {
+        this.userData = {
+          name: data.user.firstname + ' ' + data.user.lastname,
+          imgSrc: data.user.avatar,
+          occupation: titleCase(data.role)
+        }
+      },
+      error: (err) => {
+
+      }
+    })
+
   }
 
 
 
-  userData: any = {
-    imgSrc: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-    name: 'John Doe',
-    occupation: 'Student'
-  }
+  userData!: any
 
 }

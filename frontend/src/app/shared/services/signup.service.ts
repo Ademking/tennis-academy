@@ -24,8 +24,9 @@ export class SignupService {
     address: string,
     city: string,
     country: string,
+    gender: string
   ): Observable<any> {
-    return this.http.post<{ token: string }>(this.baseURL + '/register', {
+    return this.http.post<any>(this.baseURL + '/register', {
       firstname: firstName,
       lastname: lastName,
       email: email,
@@ -36,6 +37,7 @@ export class SignupService {
       address: address,
       city: city,
       country: country,
+      gender: gender
     });
 
   }

@@ -32,16 +32,14 @@
 
         <ul role="list" class="text-sm font-medium text-gray-900 divide-y divide-gray-200">
           <li class="flex items-start py-6 space-x-4">
-            <img
-              src="https://static.wixstatic.com/media/a80969_0632e3fc7ef8479da74288a0cdbcff46~mv2.png/v1/fill/w_400,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/tennis-2.png"
-              alt="Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps."
-              class="flex-none w-20 h-20 rounded-md object-center object-cover">
+
             <div class="flex-auto space-y-1">
-              <h3>Course 1</h3>
-              <p class="text-gray-500">Start date: 18/05/2022</p>
+              <h3>{{ course.name }}</h3>
+              <p class="text-gray-500">{{ course.description }}</p>
+
 
             </div>
-            <p class="flex-none text-base font-medium">150 TND</p>
+            <p class="flex-none text-base font-medium">{{ course.price }} TND</p>
           </li>
 
           <!-- More products... -->
@@ -50,17 +48,17 @@
         <dl class=" text-sm font-medium text-gray-900 space-y-6 border-t border-gray-200 pt-6 lg:block">
 
 
-
+          <!--
 
           <div class="flex items-center justify-between">
             <dt class="text-gray-600">Taxes</dt>
             <dd>9 TND</dd>
-          </div>
-
+          </div> -->
+          <!--
           <div class="flex items-center justify-between border-t border-gray-200 pt-6">
             <dt class="text-base">Total</dt>
             <dd class="text-base">159 TND</dd>
-          </div>
+          </div> -->
         </dl>
 
 
@@ -75,8 +73,9 @@
         <section aria-labelledby="payment-heading">
           <h2 id="payment-heading pt-10" class="text-lg font-medium text-gray-900">When do you want to start ?</h2>
 
-          <p-calendar inputId="basic" [(ngModel)]="courseDate"
-          inputStyleClass="aaa"  styleClass="small-calendar p-inputtext-sm mt-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+          <p-calendar inputId="basic" [ngModelOptions]="{standalone: true}" [(ngModel)]="courseDate"
+            inputStyleClass="aaa"
+            styleClass="small-calendar p-inputtext-sm mt-4 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
           </p-calendar>
         </section>
 
@@ -89,7 +88,8 @@
               <div class="mt-1">
                 <input pInputText
                   class="p-inputtext-sm block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
-                  type="text" id="name-on-card" name="name-on-card" autocomplete="cc-name" [(ngModel)]="nameOnCard">
+                  type="text" id="name-on-card" name="name-on-card" autocomplete="cc-name"
+                  [ngModelOptions]="{standalone: true}" [(ngModel)]="nameOnCard" [ngModelOptions]="{standalone: true}">
               </div>
             </div>
 
@@ -97,7 +97,9 @@
               <label for="card-number" class="block text-sm font-medium text-gray-700">Card number</label>
               <div class="mt-1">
 
-                <p-inputMask [(ngModel)]="cardNumber" mask="9999-9999-9999" styleClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"></p-inputMask>
+                <p-inputMask [ngModelOptions]="{standalone: true}" [(ngModel)]="cardNumber" mask="9999-9999-9999"
+                  styleClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                </p-inputMask>
 
                 <!-- <input type="text" id="card-number" name="card-number" autocomplete="cc-number" [(ngModel)]="cardNumber"
                   class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"> -->
@@ -109,7 +111,9 @@
                 (MM/YY)</label>
               <div class="mt-1">
 
-                <p-inputMask [(ngModel)]="expiryDate" mask="99/99" styleClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"></p-inputMask>
+                <p-inputMask [ngModelOptions]="{standalone: true}" [(ngModel)]="expiryDate" mask="99/99"
+                  styleClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                </p-inputMask>
 
                 <!-- <input type="text" name="expiration-date" id="expiration-date" autocomplete="cc-exp"
                   [(ngModel)]="expiryDate"
@@ -120,7 +124,9 @@
             <div>
               <label for="cvc" class="block text-sm font-medium text-gray-700">CVC</label>
               <div class="mt-1">
-                <p-inputMask [(ngModel)]="cvv" mask="999" styleClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"></p-inputMask>
+                <p-inputMask [ngModelOptions]="{standalone: true}" [(ngModel)]="cvv" mask="999"
+                  styleClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                </p-inputMask>
                 <!-- <input type="text" name="cvc" id="cvc" autocomplete="csc" [(ngModel)]="cvv"
                   class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"> -->
               </div>

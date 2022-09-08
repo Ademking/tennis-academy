@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import { HotToastService } from '@ngneat/hot-toast';
+import { environment } from 'src/environments/environment';
+import { DataService } from 'src/app/shared/services/data.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -9,29 +12,39 @@ import { HotToastService } from '@ngneat/hot-toast';
 })
 export class MainComponent implements OnInit {
 
-   items!: MenuItem[];
+  avatarsPath = environment.STORED_IMAGES_URL;
+  items!: MenuItem[];
 
-  constructor(private toast: HotToastService) { }
+  constructor(private toast: HotToastService, private dataService: DataService, private router: Router) { }
 
   ngOnInit(): void {
-    this.items = [
-      {label:'Categories'},
-      {label:'Sports'},
-      {label:'Football'},
-      {label:'Countries'},
-      {label:'Spain'},
-      {label:'F.C. Barcelona'},
-      {label:'Squad'},
-      {label:'Lionel Messi', url: 'https://en.wikipedia.org/wiki/Lionel_Messi'}
-  ];
+
+    const titleCase = (str: string) => {
+      return str.toLowerCase().replace(/\b\w/g, s => s.toUpperCase());
+    }
+
+    this.dataService.myData().subscribe({
+      next: (data: any) => {
+        this.userData = {
+          name: data.user.firstname + ' ' + data.user.lastname,
+          imgSrc: data.user.avatar,
+          occupation: titleCase(data.role)
+        }
+      },
+      error: (err) => {
+        this.toast.error(err.error.message);
+      }
+    })
+
+
   }
 
   value!: Date;
 
-  userData: any = {
-    imgSrc: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
-    name: 'John Doe',
-    occupation: 'Student'
+  userData!: any;
+
+  openCoursesPage() {
+    this.router.navigate(['/user/courses'])
   }
 
 

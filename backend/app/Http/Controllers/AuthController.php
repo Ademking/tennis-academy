@@ -8,7 +8,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function registerPlayer(Request $request)
     {
         $request->validate([
             'firstname' => 'required|string',
@@ -16,6 +16,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|confirmed',
             'matricule' => 'string|unique:users,matricule',
+            'gender' => 'required|string',
             'birthdate' => 'date',
         ]);
         $user = new User([
@@ -23,6 +24,7 @@ class AuthController extends Controller
             'lastname' => $request->lastname,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'gender' => $request->gender,
             'matricule' => $request->matricule,
             'birthdate' => $request->birthdate,
             'phone' => $request->phone,
@@ -32,6 +34,7 @@ class AuthController extends Controller
 
         ]);
         $user->save();
+        $user->assignRole('player');
         $token = $user->createToken('tennisacademy')->plainTextToken;
         return response()->json([
             'user' => $user,
@@ -48,7 +51,7 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
-                'message' => 'The provided credentials are incorrect.'
+                'message' => 'Your email or password is incorrect'
             ], 401);
         }
         $token = $user->createToken('tennisacademy')->plainTextToken;
@@ -70,9 +73,24 @@ class AuthController extends Controller
 
     public function getRole(Request $request) {
         $connectedUser = auth('sanctum')->user();
-        $userRole = $connectedUser->getRoleNames();
+        try {
+            $userRole = $connectedUser->getRoleNames();
+            return response()->json([
+                'role' => $userRole[0]
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'You are not connected'
+            ], 401);
+        }
+
+    }
+
+    public function getConnectedUser(Request $request) {
+        $connectedUser = auth('sanctum')->user();
         return response()->json([
-            'role' => $userRole[0]
+            'user' => $connectedUser,
+            'role' => $connectedUser->getRoleNames()[0]
         ]);
     }
 }

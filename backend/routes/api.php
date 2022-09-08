@@ -11,9 +11,9 @@ use App\Http\Controllers\ReservationController;
 
 Route::prefix('v1')->group(function () {
     // Public routes
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::get('/my-role', [AuthController::class, 'getRole']);
+    Route::post('/register', [AuthController::class, 'registerPlayer']); // Register a new player
+    Route::post('/login', [AuthController::class, 'login']); // Login
+
 
     // Protected routes
     Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -25,5 +25,9 @@ Route::prefix('v1')->group(function () {
             'coaches' => CoachController::class,
             'reservations' => ReservationController::class,
         ]);
+        Route::get('/my-role', [AuthController::class, 'getRole']); // Get the role of the logged in user
+        Route::get('/me', [AuthController::class, 'getConnectedUser']); // Get connected user data
+        Route::post('/courses/{course}/purchase', [CourseController::class, 'purchaseCourse']); // Purchase a course
+
     });
 });

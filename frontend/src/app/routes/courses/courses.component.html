@@ -11,7 +11,28 @@
     </div>
     <div class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
 
-      <app-course-card *ngFor="let course of courseData" [course]="course"></app-course-card>
+      <ng-container *ngIf="courseData.length == 0">
+        <div *ngFor="let e of [].constructor(9); let i = index" class="custom-skeleton p-4">
+          <div class="flex mb-3">
+            <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+            <div>
+              <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+              <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+              <p-skeleton height=".5rem"></p-skeleton>
+            </div>
+          </div>
+          <p-skeleton width="100%" height="150px"></p-skeleton>
+          <div class="flex justify-content-between mt-3">
+            <p-skeleton width="4rem" height="2rem"></p-skeleton>
+            <p-skeleton width="4rem" height="2rem"></p-skeleton>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="courseData.length != 0">
+        <app-course-card *ngFor="let course of courseData" [course]="course"></app-course-card>
+      </ng-container>
+
+
 
 
     </div>

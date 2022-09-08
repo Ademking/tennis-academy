@@ -18,7 +18,7 @@ class CourseSeeder extends Seeder
     public function run()
     {
         $this->faker = Faker::create();
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
 
         // get list of coaches
         $coaches = \App\Models\User::role('coach')->get();
@@ -27,9 +27,9 @@ class CourseSeeder extends Seeder
             $course = \App\Models\Course::create([
                 'name' => 'Tennis Course ' . $i,
                 'description' => $this->faker->paragraph(10),
-                'category' => $this->faker->text,
-                'image' => $this->faker->text,
-                'price' => $this->faker->numberBetween($min = 1000, $max = 9000),
+                'category' => 'Category ' . $i,
+                'image' => 'https://www.usta.com/content/dam/usta/Articles/2021-primary/Junior-Circuit-1170x585.jpg.thumb.1280.1280.png',
+                'price' => $this->faker->numberBetween($min = 1000, $max = 2000),
                 'start_date' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
                 'end_date' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
                 'coach_id' => $coaches->random()->id,

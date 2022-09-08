@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { PageScrollService } from 'ngx-page-scroll-core';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -19,11 +20,21 @@ import { DOCUMENT } from '@angular/common';
     ])
   ]
 })
+
+
 export class HomeComponent implements OnInit {
 
-  constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) { }
+  constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  openSignup(){
+    this.router.navigate(['/register']);
+  }
+
+  openLogin(){
+    this.router.navigate(['/login']);
   }
 
   isMenuOpen = false;

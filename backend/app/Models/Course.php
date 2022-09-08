@@ -18,4 +18,19 @@ class Course extends Model
         'end_date',
         'coach_id',
     ];
+
+    public function coach()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Models\Review', 'course_id');
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany('App\Models\CoursePurchase', 'course_id');
+    }
 }

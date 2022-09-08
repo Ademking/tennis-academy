@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class CoachController extends Controller
 {
@@ -13,7 +14,9 @@ class CoachController extends Controller
      */
     public function index()
     {
-        //
+        // get users with coach role
+        $coaches = User::role('coach')->get();
+        return $coaches;
     }
 
     /**

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
   selector: 'app-course-details',
@@ -10,10 +11,26 @@ export class CourseDetailsComponent implements OnInit {
 
 
   isModalOpen: boolean = false;
+  currentUser!: any;
+  courseDate = new Date();
+  course: any;
 
-  constructor(private router: Router) { }
+
+  constructor(private router: Router, private dataService: DataService, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
+   // get id from url
+    this.route.params.subscribe((params: any) => {
+      this.getCurrentUser();
+      this.getCourseDetails(params.id);
+    });
+  }
+
+  getCurrentUser(){
+    this.dataService.myData().subscribe((data: any) => {
+      this.currentUser = data.user;
+    });
   }
 
 
@@ -32,17 +49,13 @@ export class CourseDetailsComponent implements OnInit {
     this.isModalOpen = !this.isModalOpen;
   }
 
-  courseDate = new Date();
 
 
-  course: any =  {
-    id: 1,
-    type: 'Improver to Intermediate',
-    title: 'JUNIOR COACHING',
-    description: 'TW Tennis offers a fun, open and inspiring junior coaching experience that offers players classes from grass roots level to competition standard. Our highly experienced coaches and assistants will help develop the right mix of technical and tactical improvement, whilst making sure that each class is fun and players are happy learning on cour',
-    image: 'https://www.usta.com/content/dam/usta/Articles/2021-primary/Junior-Circuit-1170x585.jpg.thumb.1280.1280.png',
-    coach: 'John Doe',
-    coachAvatar: 'https://picsum.photos/400/400?v' + Math.random(),
-    price: '200 TND',
+  getCourseDetails(courseId: string) {
+    // get course details from backend
+    this.dataService.getCourseDetails(courseId).subscribe((data: any) => {
+      this.course = data;
+    });
   }
+
 }

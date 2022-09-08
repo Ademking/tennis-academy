@@ -1,6 +1,5 @@
 <div class="min-h-full flex ">
-  <div
-    class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 w-full md:w-5/12 ml-auto ">
+  <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 w-full md:w-4/12 ml-auto ">
     <div class="mx-auto w-full max-w-sm lg:w-96 ">
       <div>
         <img class=" h-12 w-auto" src="assets/logo-black.png" alt="TennisAcademy">
@@ -17,8 +16,8 @@
             <div>
               <label for="firstname" class="block text-sm font-medium text-gray-700"> Your First name </label>
               <div class="mt-1">
-                <input formControlName="firstname" id="firstname" name="firstname" type="text" required
-                  placeholder="Foulen Fouleni"
+                <input [ngClass]="{'border-red-500': submitted && f['firstname'].errors}" formControlName="firstname" id="firstname" name="firstname" type="text" required
+                  placeholder="Foulen"
                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
 
               </div>
@@ -27,16 +26,40 @@
             <div>
               <label for="lastname" class="block text-sm font-medium text-gray-700"> Your last name </label>
               <div class="mt-1">
-                <input formControlName="lastname" id="lastname" name="lastname" type="text" required
-                  placeholder="Foulen Fouleni"
+                <input [ngClass]="{'border-red-500': submitted && f['lastname'].errors}" formControlName="lastname" id="lastname" name="lastname" type="text" required
+                  placeholder="Fouleni"
                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
               </div>
             </div>
 
+
+            <div>
+              <label for="gender" class="block text-sm font-medium text-gray-700"> Your gender </label>
+              <div class="mt-1">
+                <fieldset class="mt-4">
+                  <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                    <div class="flex items-center">
+                      <input [value]="'male'" [ngClass]="{'border-red-500': submitted && f['gender'].errors}" formControlName="gender" id="gender" name="gender" type="radio" checked class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300">
+                      <label for="gender" class="ml-3 block text-sm font-medium text-gray-700"> Male </label>
+                    </div>
+                    <div class="flex items-center">
+                      <input [value]="'female'" [ngClass]="{'border-red-500': submitted && f['gender'].errors}" formControlName="gender" id="sms" name="gender" type="radio" class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300">
+                      <label for="sms" class="ml-3 block text-sm font-medium text-gray-700"> Female </label>
+                    </div>
+
+                  </div>
+                </fieldset>
+
+
+              </div>
+            </div>
+
+
+
             <div>
               <label for="email" class="block text-sm font-medium text-gray-700"> Email address </label>
               <div class="mt-1">
-                <input formControlName="email" id="email" name="email" type="email" autocomplete="email" required
+                <input [ngClass]="{'border-red-500': submitted && f['email'].errors}" formControlName="email" id="email" name="email" type="email" autocomplete="email" required
                   placeholder="contact@email.com"
                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
               </div>
@@ -45,7 +68,7 @@
             <div class="space-y-1">
               <label for="password" class="block text-sm font-medium text-gray-700">Your Password </label>
               <div class="mt-1">
-                <input formControlName="password" id="password" name="password1" type="password"
+                <input [ngClass]="{'border-red-500': submitted && f['password'].errors}" formControlName="password" id="password" name="password1" type="password"
                   autocomplete="current-password" required
                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
               </div>
@@ -55,7 +78,7 @@
               <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password
               </label>
               <div class="mt-1">
-                <input formControlName="password_confirmation" id="password_confirmation" name="password_confirmation"
+                <input [ngClass]="{'border-red-500': submitted && f['password_confirmation'].errors}" formControlName="password_confirmation" id="password_confirmation" name="password_confirmation"
                   type="password" autocomplete="current-password" required
                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
               </div>
@@ -64,7 +87,7 @@
             <div class="space-y-1">
               <label for="birthdate" class="block text-sm font-medium text-gray-700">Your birthdate </label>
               <div class="mt-1">
-                <input formControlName="birthdate" id="birthdate" name="birthdate" type="date" required
+                <input [ngClass]="{'border-red-500': submitted && f['birthdate'].errors}" formControlName="birthdate" id="birthdate" name="birthdate" type="date" required
                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
               </div>
             </div>
@@ -72,7 +95,7 @@
             <div class="space-y-1">
               <label for="phone" class="block text-sm font-medium text-gray-700">Your Phone number </label>
               <div class="mt-1">
-                <input formControlName="phone" id="phone" name="phone" type="tel" required
+                <input [ngClass]="{'border-red-500': submitted && f['phone'].errors}" placeholder="20123456" formControlName="phone" id="phone" name="phone" type="tel" required
                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
               </div>
             </div>
@@ -80,7 +103,7 @@
             <div class="space-y-1">
               <label for="address" class="block text-sm font-medium text-gray-700">Your Address </label>
               <div class="mt-1">
-                <textarea formControlName="address" id="address" name="address" type="address" required
+                <textarea [ngClass]="{'border-red-500': submitted && f['address'].errors}" placeholder="Your address here..." formControlName="address" id="address" name="address" type="address" required
                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"></textarea>
               </div>
             </div>
@@ -88,7 +111,7 @@
             <div class="space-y-1">
               <label for="city" class="block text-sm font-medium text-gray-700">Your city </label>
               <div class="mt-1">
-                <input formControlName="city" id="city" name="city" type="text" required
+                <input [ngClass]="{'border-red-500': submitted && f['city'].errors}" placeholder="Your city here..." formControlName="city" id="city" name="city" type="text" required
                   class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
               </div>
             </div>
@@ -96,9 +119,9 @@
             <div class="space-y-1">
               <label for="country" class="block text-sm font-medium text-gray-700">Your country </label>
               <div class="mt-1">
-                <select formControlName="country" id="country" name="country"
+                <select [ngClass]="{'border-red-500': submitted && f['country'].errors}" formControlName="country" id="country" name="country"
                   class="block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
-                  <option value="Tunisia">Tunisia</option>
+                  <option value="Tunisia" selected>Tunisia</option>
                   <option value="France">France</option>
                   <option value="Italy">Italy</option>
                   <option value="Spain">Spain</option>
@@ -120,7 +143,25 @@
       </div>
     </div>
   </div>
-  <div class="hidden lg:block relative flex-1 md:w-7/12 md:fixed min-h-screen ">
-    <img class="absolute inset-0 h-full w-full object-cover" src="assets/bg2.jpg" alt="">
+  <div class="hidden lg:block relative flex-1 md:w-8/12 md:fixed min-h-screen ">
+    <!-- div with video background -->
+    <div class="absolute inset-0 z-0 ">
+      <video autoplay muted loop class="w-full h-full object-cover ">
+        <source src="assets/bg-video2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <!-- div with gradient overlay -->
+    <div class="absolute inset-0 z-10 bg-gradient"></div>
+    <!-- div with content -->
+    <div class="absolute inset-0 z-20 flex items-center justify-center">
+      <div class="text-center">
+        <img src="assets/logo-white.png" width="500" alt="" srcset="">
+        <h1 class="text-xl text-white font-semibold">Play Tennis, Stay Fit!</h1>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- <img class="absolute inset-0 h-full w-full object-cover" src="assets/bg2.jpg" alt="">
+  </div>
+</div> -->

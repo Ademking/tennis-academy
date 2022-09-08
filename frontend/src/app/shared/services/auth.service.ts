@@ -29,24 +29,27 @@ export class AuthService {
     return localStorage.getItem('access_token');
   }
 
-   getRole() {
-    console.log('Getting user role ...');
+  getRole() {
+
+
     // if user role is not set, get it
     if (this.userRole == '') {
-      return this.http.get(this.baseURL + '/my-role').pipe(
+
+      let sub = this.http.get(this.baseURL + '/my-role').pipe(
         map((res: any) => {
           this.userRole = res.role;
           return res;
         })
       );
+      console.log(sub)
+      return sub;
     }
     else {
-      // return subscription
-      let sub = new Observable<string>(observer => {
-        observer.next(this.userRole);
-      });
 
-      return sub;
+      return new Observable((observer) => {
+        observer.next(this.userRole);
+      })
+
     }
 
   }
@@ -57,9 +60,10 @@ export class AuthService {
         next: (data: any) => {
           localStorage.removeItem('access_token');
           this.router.navigate(['/login']);
+          window.location.reload();
         },
         error: (err) => {
-          console.log(err);
+
         }
       }
     );

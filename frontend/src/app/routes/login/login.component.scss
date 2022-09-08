@@ -5,31 +5,35 @@
 @keyframes custom-progress-spinner-color {
   100%,
   0% {
-      stroke: #ffffff;
+    stroke: #ffffff;
   }
   40% {
-      stroke: #ffffff;
+    stroke: #ffffff;
   }
   66% {
-      stroke: #ffffff;
+    stroke: #ffffff;
   }
   80%,
   90% {
-      stroke: #ffffff;
+    stroke: #ffffff;
   }
 }
 
 @keyframes custom-progress-spinner-dash {
   0% {
-      stroke-dasharray: 1, 200;
-      stroke-dashoffset: 0;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
   }
   50% {
-      stroke-dasharray: 89, 200;
-      stroke-dashoffset: -35px;
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
   }
   100% {
-      stroke-dasharray: 89, 200;
-      stroke-dashoffset: -124px;
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
   }
+}
+
+.bg-gradient {
+  background: linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.9) 100%);
 }

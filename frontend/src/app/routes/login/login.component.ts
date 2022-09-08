@@ -39,12 +39,13 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.form.value.email, this.form.value.password).subscribe(
       {
         next: (isLoggedIn: Boolean) => {
+
           if (isLoggedIn) {
             this.submitted = false;
-            this.toast.success('Logged in successfully', {
+            this.toast.success('Login Successful', {
               position: 'bottom-center',
             });
-            this.router.navigate(['/user']);
+            this.router.navigateByUrl('/user');
           }
         },
         error: (err) => {

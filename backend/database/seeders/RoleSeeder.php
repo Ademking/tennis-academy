@@ -128,6 +128,7 @@ class RoleSeeder extends Seeder
         $playerRole->givePermissionTo([
             'read courses',
             'read courts',
+            'read coaches',
 
             'create reservations',
             'read reservations',
@@ -145,51 +146,5 @@ class RoleSeeder extends Seeder
             'delete answers',
         ]);
 
-        // create players and assign roles
-        for ($i = 1; $i <= 10; $i++) {
-            $player = \App\Models\User::create([
-                'firstname' => $this->faker->firstName,
-                'lastname' => $this->faker->lastName,
-                'email' => 'player' . $i . '@gmail.com',
-                'password' => bcrypt('123456789'),
-                'birthdate' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
-                'phone' => $this->faker->phoneNumber,
-                'address' => $this->faker->address,
-                'city' => $this->faker->city,
-                'country' => $this->faker->country,
-            ]);
-            $player->assignRole($playerRole);
-        }
-
-        // create coaches and assign roles
-        for ($i = 1; $i <= 10; $i++) {
-            $coach = \App\Models\User::create([
-                'firstname' => $this->faker->firstName,
-                'lastname' => $this->faker->lastName,
-                'email' => 'coach' . $i . '@gmail.com',
-                'password' => bcrypt('123456789'),
-                'birthdate' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
-                'phone' => $this->faker->phoneNumber,
-                'address' => $this->faker->address,
-                'city' => $this->faker->city,
-                'country' => $this->faker->country,
-                'matricule' => $this->faker->randomNumber($nbDigits = 8, $strict = false),
-            ]);
-            $coach->assignRole($coachRole);
-        }
-
-        // create admin and assign role
-        $admin = \App\Models\User::create([
-            'firstname' => $this->faker->firstName,
-            'lastname' => $this->faker->lastName,
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('123456789'),
-            'birthdate' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
-            'phone' => $this->faker->phoneNumber,
-            'address' => $this->faker->address,
-            'city' => $this->faker->city,
-            'country' => $this->faker->country,
-        ]);
-        $admin->assignRole($adminRole);
     }
 }

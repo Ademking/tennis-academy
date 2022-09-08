@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HotToastService } from '@ngneat/hot-toast';
+import { DataService } from 'src/app/shared/services/data.service';
 
 
 @Component({
@@ -9,11 +10,14 @@ import { HotToastService } from '@ngneat/hot-toast';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private toast: HotToastService) { }
+  constructor(private toast: HotToastService, private dataService: DataService) { }
 
+  @Input() course: any;
   @Output() closeModal = new EventEmitter<boolean>();
 
   ngOnInit(): void {
+
+    console.log(this.course)
   }
 
   courseDate = Date;
@@ -23,15 +27,33 @@ export class CheckoutComponent implements OnInit {
   expiryDate!: string;
   cvv!: string;
 
-  showToast(message: string){
-    this.toast.success(message, {
-      position: 'top-right'
-    });
-  }
 
-  pay(){
-    this.showToast('Thank you for your purchase!');
-    // close the checkout modal
-    this.closeModal.emit(true);
+  pay() {
+
+    this.dataService.purchaseCourse(
+      this.course.id,
+      {
+        nameOnCard: this.nameOnCard,
+        cardNumber: this.cardNumber,
+        expiryDate: this.expiryDate,
+        cvv: this.cvv,
+      },
+      this.courseDate
+    ).subscribe({
+      next: (data: any) => {
+        console.log(data)
+        this.toast.success('Thank you for your purchase!', {
+          position: 'top-right'
+        });
+        this.closeModal.emit(true)
+      },
+      error: (error: any) => {
+        console.log(error)
+        this.toast.error('Something went wrong! Please verify your card details and try again.', {
+          position: 'top-right'
+        });
+      }
+    })
   }
 }
+

@@ -10,6 +10,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { QuillModule } from 'ngx-quill';
 import { ModalComponent } from './components/modal/modal.component';
 import { DialogModule } from 'primeng/dialog';
+import { SkeletonModule } from 'primeng/skeleton';
 import { InputTextModule } from 'primeng/inputtext';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { InputMaskModule } from 'primeng/inputmask';
@@ -28,7 +29,7 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { AdminlayoutComponent } from './components/adminlayout/adminlayout.component';
 import { SanitizeHtmlPipe } from './pipes/sanitizehtml.pipe';
 import { NgxEchartsModule } from 'ngx-echarts';
-
+import { AvatarModule } from 'primeng/avatar';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -62,17 +63,16 @@ FullCalendarModule.registerPlugins([
     CalendarModule,
     DialogModule,
     InputTextModule,
+    SkeletonModule,
     BreadcrumbModule,
     InputMaskModule,
+    AvatarModule,
     HotToastModule.forRoot(),
 
 
     FormsModule,
     ReactiveFormsModule,
     FullCalendarModule,
-    DialogModule,
-    InputTextModule,
-    CalendarModule,
     CheckboxModule,
     ButtonModule,
     TabViewModule,
@@ -102,6 +102,7 @@ FullCalendarModule.registerPlugins([
     ModalComponent,
     CalendarModule,
     DialogModule,
+    SkeletonModule,
     InputTextModule,
     BreadcrumbModule,
     InputMaskModule,
@@ -109,7 +110,7 @@ FullCalendarModule.registerPlugins([
     NgxPageScrollCoreModule,
     NgxEchartsModule,
     ProgressSpinnerModule,
-
+    AvatarModule,
   ]
 
 })
