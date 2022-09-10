@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
                 'address' => $this->faker->address,
                 'city' => $this->faker->city,
                 'country' => $this->faker->country,
-                'avatar' => 'https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg',
+                'avatar' => 'https://xsgames.co/randomusers/assets/avatars/male/' . random_int(1, 74) . '.jpg'
             ]);
             $player->assignRole('player');
         }
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
                 'city' => $this->faker->city,
                 'country' => $this->faker->country,
                 'matricule' => $this->faker->randomNumber($nbDigits = 8, $strict = false),
-                'avatar' => 'https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg',
+                'avatar' => 'https://xsgames.co/randomusers/assets/avatars/male/' . random_int(1, 74) . '.jpg'
             ]);
             $coach->assignRole('coach');
         }
@@ -70,7 +70,8 @@ class UserSeeder extends Seeder
             'address' => $this->faker->address,
             'city' => $this->faker->city,
             'country' => $this->faker->country,
-            'avatar' => 'https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg',
+            'avatar' => 'https://xsgames.co/randomusers/assets/avatars/male/' . random_int(1, 74) . '.jpg'
+            //'avatar' => 'https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg',
         ]);
         $admin->assignRole('admin');
     }

@@ -30,6 +30,7 @@ export class MainComponent implements OnInit {
           imgSrc: data.user.avatar,
           occupation: titleCase(data.role)
         }
+
       },
       error: (err) => {
         this.toast.error(err.error.message);
@@ -51,13 +52,13 @@ export class MainComponent implements OnInit {
   }
 
 
-  myCourses: any[] = [];
+  myCourses!: any[];
 
 
   getMyCourses() {
     this.dataService.myCourses().subscribe({
       next: (data: any) => {
-        this.myCourses = data.courses;
+        this.myCourses = data;
         console.log(this.myCourses);
       },
       error: (err) => {
@@ -65,6 +66,13 @@ export class MainComponent implements OnInit {
       }
     })
   }
+
+
+  str2Date(date: string) {
+    return new Date(date);
+  }
+
+  today = new Date()
 
 
 }

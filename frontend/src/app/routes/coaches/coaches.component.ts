@@ -20,4 +20,13 @@ export class CoachesComponent implements OnInit {
     });
   }
 
+  selectedCoach!: any;
+  isCoachDetailsModalOpen: boolean = false;
+  openCoachDetails(coach: any) {
+    this.selectedCoach = coach;
+    this.isCoachDetailsModalOpen = coach;
+    console.log(coach);
+  }
+
+
 }

@@ -81,7 +81,7 @@
                 </svg>
               </ng-container> -->
 
-              <p-rating [ngModel]="courseRating" [readonly]="true" [cancel]="false"></p-rating>
+              <p-rating [iconOnStyle]="{'color':'#facc15'}" [ngModel]="courseRating" [readonly]="true" [cancel]="false"></p-rating>
 
 
             </div>
@@ -94,10 +94,15 @@
 
 
         <div class="mt-10">
-          <button type="button" (click)="goToCheckout()"
+          <button type="button" (click)="goToCheckout()" *ngIf="!isUserAlreadyEnrolledToCourse"
             class="w-full bg-green-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-green-500">Enroll
             Now
             ({{ course.price }} TND)</button>
+
+            <button type="button"  *ngIf="isUserAlreadyEnrolledToCourse"
+            class="w-full bg-red-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-red-500">
+            Already Enrolled</button>
+
         </div>
         <ng-template #container>
           Hello from container
@@ -226,7 +231,7 @@
                     <div class="absolute bottom-0 inset-x-0 pl-3 pr-2 py-2 flex justify-between">
                       <div class="flex items-center space-x-5">
                        <span class="mr-2"> Your review: </span>
-                        <p-rating  [iconOnStyle]="{'color':'#15803d'}" [(ngModel)]="reviewVal" [cancel]="false" [ngModelOptions]="{standalone: true}"></p-rating>
+                        <p-rating  [iconOnStyle]="{'color':'#facc15'}" [(ngModel)]="reviewVal" [cancel]="false" [ngModelOptions]="{standalone: true}"></p-rating>
                       </div>
                       <div class="flex-shrink-0">
 

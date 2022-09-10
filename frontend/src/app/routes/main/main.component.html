@@ -17,7 +17,8 @@
   </div>
 
 
-  <div class="pt-20 text-center" *ngIf="myCourses.length > 0">
+  <!-- no courses -->
+  <div class="pt-20 text-center" *ngIf="myCourses?.length === 0">
     <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"
       aria-hidden="true">
       <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -40,26 +41,98 @@
     </div>
   </div>
 
+  <!-- courses -->
+  <ng-container *ngIf="myCourses?.length != 0">
+    <div class="mt-4">
+      <div class="flow-root">
+        <h1 class="text-2xl font-bold text-gray-900 mt-5 mb-8">My Courses</h1>
+        <ul role="list" class="-my-5 divide-y divide-gray-200">
+          <li *ngFor="let course of myCourses" class="py-4">
+            <div class="flex space-x-3">
+              <div class="flex-shrink-0">
+                <img class="h-8 w-8 " src="assets/racket.png" alt="">
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-medium text-gray-900">
+                  <a routerLink="/user/courses/{{ course.course.id }}" class="hover:underline">{{ course.course.name }}</a>
+                </p>
+                <p class="text-sm text-gray-500">
+                  <a routerLink="/user/courses/{{ course.course.id }}" class="hover:underline">View Course</a>
+                </p>
+              </div>
+              <div class="flex-shrink-0 self-center flex">
+                <button type="button" *ngIf="str2Date(course?.course.end_date) > today"
+                  class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                  Active
+                </button>
+                <button type="button" *ngIf="str2Date(course.course.end_date) < today"
+                class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-full text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                Not Active
+              </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-  <ng-container *ngIf="myCourses.length > 0">
-    <p-table [value]="myCourses" responsiveLayout="scroll">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Course</th>
-          <th>Start Date</th>
-          <th>Coach</th>
-          <th>Purchase Date</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-course>
-        <tr>
-          <td>{{course.course.name}}</td>
-          <td>{{course.startDate | date: 'dd/MM/yyyy'}}</td>
-          <td>{{course.course.coach.firstname + ' ' + course.course.coach.lastname}}</td>
-          <td>{{course.purchaseDate | date: 'dd/MM/yyyy'}}</td>
-        </tr>
-      </ng-template>
-    </p-table>
+      <!-- <p-table [value]="myCourses" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Course</th>
+            <th>Start Date</th>
+            <th>Coach</th>
+            <th>Purchase Date</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-course>
+          <tr>
+            <td>{{course.course.name}}</td>
+            <td>{{course.start_date | date: 'dd/MM/yyyy'}}</td>
+            <td>{{course.coach.firstname + ' ' + course.coach.lastname}}</td>
+            <td>{{course.created_at | date: 'dd/MM/yyyy'}}</td>
+          </tr>
+        </ng-template>
+      </p-table> -->
+    </div>
+  </ng-container>
+
+
+
+
+  <ng-container >
+    <div class="mt-4">
+      <div class="flow-root">
+        <h1 class="text-2xl font-bold text-gray-900 mt-5 mb-8" *ngIf="myCourses?.length != 0">My Courts</h1>
+        <ul role="list" class="-my-5 divide-y divide-gray-200">
+          <li *ngFor="let course of myCourses" class="py-4">
+            <div class="flex space-x-3">
+              <div class="flex-shrink-0">
+                <img class="h-8 w-8 " src="assets/tennis-court.png" alt="">
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-medium text-gray-900">
+                  <a routerLink="/user/courses/{{ course.course.id }}" class="hover:underline">{{ course.course.name }}</a>
+                </p>
+                <p class="text-sm text-gray-500">
+                  <a routerLink="/user/courses/{{ course.course.id }}" class="hover:underline">View Course</a>
+                </p>
+              </div>
+              <div class="flex-shrink-0 self-center flex">
+                <button type="button" *ngIf="str2Date(course?.course.end_date) > today"
+                  class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-full text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                  Active
+                </button>
+                <button type="button" *ngIf="str2Date(course.course.end_date) < today"
+                class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded-full text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                Not Active
+              </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
   </ng-container>
 
 

@@ -30,6 +30,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/courses/{course}/purchase', [CourseController::class, 'purchaseCourse']); // Purchase a course
         Route::post('/courses/{course}/review', [CourseController::class, 'reviewCourse']); // Review a course
         Route::get('/me/courses', [CourseController::class, 'getMyCourses']); // Get the courses of the logged in user
-
+        Route::get('/courses/{course}/is-enrolled', [CourseController::class, 'isEnrolled']); // Check if the logged in user is enrolled in a course
+        Route::get('/guidelines', [CourseController::class, 'getGuidelines']); // Get the guidelines
     });
 });

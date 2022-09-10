@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
   selector: 'app-guidelines',
@@ -7,13 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuidelinesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
+    this.getGuidelines();
   }
 
-  markdown = `
-    ### TODO - dynamic content for the guidelines
-  `;
+  markdown = ``;
 
+
+  getGuidelines(){
+    this.dataService.getGuidelines().subscribe({
+      next: (data: any) => {
+        this.markdown = data.guidelines;
+      }
+    })
+  }
 }

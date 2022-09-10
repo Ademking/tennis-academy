@@ -3,6 +3,7 @@
   <div class="max-w-7xl mx-auto py-8 px-4 text-center sm:px-6 lg:px-8 ">
     <div class="space-y-8 sm:space-y-12">
       <div class="space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl">
+        <img class="mx-auto h-24 mb-4 w-auto" src="assets/tennis-player.png" alt="Workflow">
         <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">The Coaches</h2>
         <p class="text-xl text-gray-500">Meet the team that’s behind the success of our academy.</p>
       </div>
@@ -10,7 +11,8 @@
         class="mx-auto grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 md:gap-x-6 lg:max-w-5xl lg:gap-x-8 lg:gap-y-12 xl:grid-cols-6">
 
 
-        <li *ngFor="let coach of coaches">
+
+        <li *ngFor="let coach of coaches" (click)="openCoachDetails(coach)" class="cursor-pointer">
           <div class="space-y-4">
             <img class="mx-auto h-20 w-20 rounded-full lg:w-24 lg:h-24" [src]="coach.avatar" alt="">
             <div class="space-y-2">
@@ -21,6 +23,7 @@
             </div>
           </div>
         </li>
+
 
 
         <ng-container *ngIf="coaches.length == 0">
@@ -37,6 +40,22 @@
             </div>
           </li>
         </ng-container>
+
+        <!-- Coach Details -->
+        <p-dialog header="Coach Details" [(visible)]="isCoachDetailsModalOpen"  [modal]="true" >
+          <div class="m-auto w-96 max-w-lg items-center justify-center overflow-hidden rounded-2xl ">
+            <div class="h-24 bg-white"></div>
+            <div class="-mt-20 flex justify-center">
+              <img class="h-32 rounded-full" [src]="selectedCoach?.avatar" />
+            </div>
+            <div class="mt-5 mb-1 px-3 text-center text-lg">{{ selectedCoach?.firstname +  ' ' + selectedCoach?.lastname }}</div>
+            <div class="mb-5 px-3 text-center text-sky-500">{{ selectedCoach?.occupation }}</div>
+            <div class="px-3 text-center text-gray-500">Phone: {{ selectedCoach?.phone }}</div>
+            <div class="px-3 text-center text-gray-500">Email: {{ selectedCoach?.email }}</div>
+
+          </div>
+
+        </p-dialog>
 
 
         <!-- More people... -->

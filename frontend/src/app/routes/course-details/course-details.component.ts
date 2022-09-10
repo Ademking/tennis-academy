@@ -25,6 +25,7 @@ export class CourseDetailsComponent implements OnInit {
     this.route.params.subscribe((params: any) => {
       this.getCurrentUser();
       this.getCourseDetails(params.id);
+      this.isUserAlreadyEnrolled(params.id);
     });
   }
 
@@ -64,48 +65,62 @@ export class CourseDetailsComponent implements OnInit {
    */
   get courseRating() {
 
-      let rating = 0;
-      if (this.course) {
-        this.course.reviews.forEach((review: any) => {
-          rating += review.rating;
-        });
-        rating = rating / this.course.reviews.length;
-      }
-
-      return rating;
-
-
-
-}
-
-reviewVal: number = 0;
-reviewText!: string;
-
-postReview() {
-
-  if (this.reviewVal == 0) {
-    this.toast.error('Please select a rating');
-    return;
-  }
-
-  if (this.reviewText == '') {
-    this.toast.error('Please enter a review');
-    return;
-  }
-
-  // post review to backend
-  this.dataService.postReview(this.course.id, this.reviewVal, this.reviewText).subscribe({
-    next: (data: any) => {
-      this.toast.success("Review posted successfully");
-      this.getCourseDetails(this.course.id);
-      this.reviewVal = 0;
-      this.reviewText = "";
-    },
-    error: (err: any) => {
-      this.toast.error("Error posting review");
+    let rating = 0;
+    if (this.course) {
+      this.course.reviews.forEach((review: any) => {
+        rating += review.rating;
+      });
+      rating = rating / this.course.reviews.length;
     }
-  })
-}
+
+    return rating;
+
+
+
+  }
+
+  reviewVal: number = 0;
+  reviewText!: string;
+
+  postReview() {
+
+    if (this.reviewVal == 0) {
+      this.toast.error('Please select a rating');
+      return;
+    }
+
+    if (this.reviewText == '') {
+      this.toast.error('Please enter a review');
+      return;
+    }
+
+    // post review to backend
+    this.dataService.postReview(this.course.id, this.reviewVal, this.reviewText).subscribe({
+      next: (data: any) => {
+        this.toast.success("Review posted successfully");
+        this.getCourseDetails(this.course.id);
+        this.reviewVal = 0;
+        this.reviewText = "";
+      },
+      error: (err: any) => {
+        this.toast.error("Error posting review");
+      }
+    })
+  }
+
+  isUserAlreadyEnrolledToCourse: boolean = false;
+
+  isUserAlreadyEnrolled(courseId: any) {
+    this.dataService.isUserAlreadyEnrolled(courseId).subscribe({
+      next: (data: any) => {
+        this.isUserAlreadyEnrolledToCourse = data.enrolled;
+      },
+      error: (err: any) => {
+        this.toast.error(err.error.message);
+      }
+    });
+
+  }
 
 
 }

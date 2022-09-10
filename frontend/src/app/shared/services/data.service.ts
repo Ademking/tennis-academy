@@ -6,6 +6,14 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class DataService {
+  /**
+   * Check if user is already enrolled to a course
+   * @param courseId;
+   * @returns
+   */
+  isUserAlreadyEnrolled(courseId: any) {
+    return this.http.get(environment.API_URL + '/courses/' + courseId + '/is-enrolled')
+  }
   myCourses() {
     return this.http.get(environment.API_URL + '/me/courses')
   }
@@ -46,6 +54,10 @@ export class DataService {
       startDate,
       courseId,
     })
+  }
+
+  getGuidelines(){
+    return this.http.get(environment.API_URL + '/guidelines')
   }
 
 }
